@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\HORSHED\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\HORSHED\\.nuget\\packages"
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+﻿@using EntityLayer.Entities
+@model List<Category>
+
+<button type="button" onclick="$('#CategoryModal').modal('show')" class="btn btn-primary" data-toggle="modal">Kategori Ekle</button>
+
+<table class="table table-hover">
+    <thead>
+        <th scope="col">ID</th>
+        <th scope="col">Kategori İsmi</th>
+        <th scope="col">Güncelle</th>
+        <th scope="col">Sil</th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.CategoryID</th>
+                <td>@item.CategoryName</td>
+                <td><button type="button" onclick="UpdateModel(@item.CategoryID,'@item.CategoryName')" class="btn btn-primary" data-toggle="modal">Güncelle</button></td>
+                <td><a class="btn btn-danger" asp-route-id="@item.CategoryID" asp-action="Delete">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal" id="CategoryModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kategori Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Create"  method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="CategoryID" class="form-control" />
+                        <input type="text" name="CategoryName" class="form-control" placeholder="Kategori İsmi" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal" id="CategoryUpdateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kategori Güncelle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Update" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="CategoryID" id="UpdateId" class="form-control" />
+                        <input type="text" name="CategoryName" id="UpdateName" class="form-control" placeholder="Kategori İsmi" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function UpdateModel(Id,Name){
+        
+        $('#UpdateId').val(Id);
+        $('#UpdateName').val(Name);
+        $('#CategoryUpdateModal').modal('show');
+    }
+    
+</script>
